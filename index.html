@@ -38,23 +38,6 @@
             from { opacity: 0; transform: translateY(20px); }
             to { opacity: 1; transform: translateY(0); }
         }
-        input[type="text"],
-        input[type="email"] {
-            padding: 14px;
-            border-radius: 8px;
-            border: 1px solid #cbd5e0; /* Light gray border */
-            width: 100%;
-            margin-bottom: 20px;
-            font-size: 16px;
-            transition: all 0.3s ease;
-            box-sizing: border-box; /* Ensure padding doesn't add to width */
-        }
-        input[type="text"]:focus,
-        input[type="email"]:focus {
-            outline: none;
-            border-color: #4f46e5; /* Indigo focus color */
-            box-shadow: 0 0 0 3px rgba(79, 70, 229, 0.2); /* Focus ring */
-        }
         .btn-primary {
             background-color: #4f46e5; /* Indigo 600 */
             color: white;
@@ -69,6 +52,7 @@
             justify-content: center;
             gap: 8px;
             box-shadow: 0 5px 15px rgba(79, 70, 229, 0.3); /* Button shadow */
+            text-decoration: none; /* Remove underline for anchor tag */
         }
         .btn-primary:hover {
             background-color: #4338ca; /* Indigo 700 */
@@ -101,118 +85,14 @@
             providing you with the essential knowledge to build your first website. From HTML basics to styling with CSS and adding interactivity
             with JavaScript, this resource covers everything you need to get started on your coding journey.
         </p>
-        <button id="download-landing-btn" class="btn-primary">
+        <!-- Link to the registration page -->
+        <a id="download-landing-btn" href="register.html" class="btn-primary">
             Download Resource
             <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
                 <path stroke-linecap="round" stroke-linejoin="round" d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H4a2 2 0 01-2-2V6a2 2 0 012-2h7l2 2h4a2 2 0 012 2v7a2 2 0 01-2 2z" />
             </svg>
-        </button>
-    </div>
-
-    <!-- Registration Page -->
-    <div id="registration-page" class="card hidden">
-        <h2 class="text-3xl font-bold text-gray-800 mb-6">Register to Download</h2>
-        <p class="text-gray-600 text-base mb-6">Please provide your details to access the download link.</p>
-        <form id="registration-form" class="space-y-4">
-            <div>
-                <input type="text" id="name" placeholder="Your Full Name" required class="w-full">
-            </div>
-            <div>
-                <input type="email" id="email" placeholder="Your Email Address" required class="w-full">
-            </div>
-            <div class="flex items-center justify-start mb-6">
-                <input type="checkbox" id="terms" class="h-5 w-5 text-indigo-600 rounded border-gray-300 focus:ring-indigo-500" required>
-                <label for="terms" class="ml-2 text-gray-700 text-sm">I agree to the <a href="#" class="text-indigo-600 hover:underline">terms and conditions</a></label>
-            </div>
-            <button id="download-registration-btn" type="submit" class="btn-primary w-full">
-                Download Now
-                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-                    <path stroke-linecap="round" stroke-linejoin="round" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" />
-                </svg>
-            </button>
-        </form>
-    </div>
-
-    <!-- Thank You Page -->
-    <div id="thank-you-page" class="card hidden">
-        <svg xmlns="http://www.w3.org/2000/svg" class="h-20 w-20 text-green-500 mx-auto mb-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-            <path stroke-linecap="round" stroke-linejoin="round" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
-        </svg>
-        <h2 class="text-3xl font-bold text-gray-800 mb-4">Thank You for Registering!</h2>
-        <p class="text-gray-600 text-lg leading-relaxed mb-8">
-            Your download should begin shortly. If it doesn't, you can access the resource directly using the link below:
-        </p>
-        <a href="http://dickyricky.com/books//Building%20a%20Web%20Site%20for%20Dummies%20-%20David%20A%20Crowder.pdf"
-           target="_blank"
-           class="text-indigo-600 hover:underline text-lg font-medium break-all block mb-4">
-            Click here to download "Building a Web Site for Dummies"
         </a>
-        <p class="text-gray-500 text-sm mt-4">Enjoy your learning journey!</p>
     </div>
 
-    <script>
-        // Get references to page containers
-        const landingPage = document.getElementById('landing-page');
-        const registrationPage = document.getElementById('registration-page');
-        const thankYouPage = document.getElementById('thank-you-page');
-
-        // Get references to buttons
-        const downloadLandingBtn = document.getElementById('download-landing-btn');
-        const downloadRegistrationBtn = document.getElementById('download-registration-btn');
-
-        // Get references to form elements
-        const registrationForm = document.getElementById('registration-form');
-        const nameInput = document.getElementById('name');
-        const emailInput = document.getElementById('email');
-        const termsCheckbox = document.getElementById('terms');
-
-        // Function to show a specific page and hide others
-        function showPage(pageToShow) {
-            landingPage.classList.add('hidden');
-            registrationPage.classList.add('hidden');
-            thankYouPage.classList.add('hidden');
-            pageToShow.classList.remove('hidden');
-        }
-
-        // Event listener for the landing page download button
-        downloadLandingBtn.addEventListener('click', () => {
-            showPage(registrationPage);
-        });
-
-        // Event listener for the registration form submission
-        registrationForm.addEventListener('submit', (event) => {
-            event.preventDefault(); // Prevent default form submission
-
-            // Basic validation
-            if (!nameInput.value.trim()) {
-                alert('Please enter your name.'); // Using a simple alert for brevity, in a real app, use a custom modal
-                return;
-            }
-            if (!emailInput.value.trim()) {
-                alert('Please enter your email.');
-                return;
-            }
-            if (!termsCheckbox.checked) {
-                alert('You must agree to the terms and conditions.');
-                return;
-            }
-
-            // In a real application, you would send this data to a server
-            console.log('Registration Data:', {
-                name: nameInput.value,
-                email: emailInput.value
-            });
-
-            // Navigate to thank you page
-            showPage(thankYouPage);
-
-            // Open the PDF in a new tab
-            window.open('http://dickyricky.com/books//Building%20a%20Web%20Site%20for%20Dummies%20-%20David%20A%20Crowder.pdf', '_blank');
-        });
-
-        // Initialize by showing the landing page
-        showPage(landingPage);
-
-    </script>
 </body>
 </html>
